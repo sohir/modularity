@@ -30,7 +30,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        useIR = true
+        //useIR = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = Compose.composeVersion
@@ -52,7 +52,6 @@ dependencies{
     implementation(Compose.tooling)
     implementation(Compose.navigation)
     implementation(Compose.hiltNavigation)
-
     implementation(Google.material)
 }
 
