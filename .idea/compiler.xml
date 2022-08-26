@@ -3,6 +3,9 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="My_Application.app" target="11" />
+      <module name="My_Application.components" target="11" />
+      <module name="My_Application.hero.ui-heroDetail" target="11" />
+      <module name="My_Application.hero.ui-heroList" target="11" />
       <module name="MyCode3.buildSrc" target="11" />
     </bytecodeTargetLevel>
   </component>

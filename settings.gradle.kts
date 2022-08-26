@@ -3,7 +3,6 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
     }
 }
 rootProject.name = "My Application"
@@ -12,3 +11,11 @@ include(":core")
 include(":hero")
 
 include(":constants")
+include(":hero:hero-domain")
+include(":hero:hero-datasource")
+include(":hero:hero-datasource-test")
+include(":hero:hero-interactors")
+include(":hero:ui-heroList")
+include(":hero:ui-heroDetail")
+
+include(":components")
