@@ -1,0 +1,13 @@
+//Will expand from this file to all Java library modules[heroDomain, heroDatasource, etc]...
+
+apply plugin: 'java-library'
+apply plugin: 'org.jetbrains.kotlin.jvm'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+dependencies {
+
+}
