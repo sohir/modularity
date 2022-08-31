@@ -4,7 +4,9 @@ import com.idbs.hero_datasource.network.EndPoints.BASE_URL
 import com.idbs.hero_domain.Hero
 import com.idbs.hero_domain.*
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class HeroDto(
     @SerialName("id")
     val id: Int,
