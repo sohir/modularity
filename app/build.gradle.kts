@@ -47,11 +47,15 @@ dependencies{
     implementation(project(Modules.core))
     implementation(project(Modules.heroDomain))
     implementation(project(Modules.heroInteractors))
+    implementation(project(Modules.ui_heroList))
 
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
     implementation(AndroidX.lifecycleVmKtx)
+
+    //Coil image loading
+    implementation(Coil.coil)
 
     implementation(Compose.activity)
     implementation(Compose.ui)

@@ -17,13 +17,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import coil.ImageLoader
 import com.idbs.core.DataState
 import com.idbs.core.Logger
 import com.idbs.core.ProgressBarState
 import com.idbs.core.UIComponent
 import com.idbs.hero_domain.Hero
 import com.idbs.hero_interactors.HeroInteractors
+import com.idbs.myapplication.R
 import com.idbs.myapplication.ui.theme.MyApplicationTheme
+import com.idbs.ui_herolist.HeroList
+import com.idbs.ui_herolist.HeroListState
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -31,11 +35,17 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class MainActivity : ComponentActivity() {
-    private val heros: MutableState<List<Hero>> = mutableStateOf(listOf())
+    private val state: MutableState<HeroListState> = mutableStateOf(HeroListState())
     private val progressBarState: MutableState<ProgressBarState> = mutableStateOf(ProgressBarState.Idle)
-
+    private lateinit var imageLoader:ImageLoader
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+       imageLoader = ImageLoader.Builder(applicationContext)
+           .error(R.drawable.error_image)
+           .placeholder(R.drawable.white_background)
+           .availableMemoryPercentage(.25) //this value from the official doc.
+           .crossfade(true)
+           .build()
         val getHeros = HeroInteractors.build(
             sqlDriver = AndroidSqliteDriver(
                 schema = HeroInteractors.schema,
@@ -57,7 +67,7 @@ class MainActivity : ComponentActivity() {
                     }
                 }
                 is DataState.Data -> {
-                    heros.value = dataState.data?: listOf()
+                    state.value = state.value.copy(heros = dataState.data?: listOf())
                 }
                 is DataState.Loading -> {
                     progressBarState.value = dataState.progressBarState
@@ -66,20 +76,8 @@ class MainActivity : ComponentActivity() {
         }.launchIn(CoroutineScope(IO))
         setContent {
             MyApplicationTheme {
-                Box(
-                    modifier = Modifier.fillMaxSize()
-                ){
-                    LazyColumn{
-                        items(heros.value){ hero ->
-                            Text(hero.localizedName)
-                        }
-                    }
-                    if(progressBarState.value is ProgressBarState.Loading){
-                        CircularProgressIndicator(
-                            modifier = Modifier.align(Alignment.Center)
-                        )
-                    }
-                }
+                HeroList(state = state.value,
+                imageLoader = imageLoader)
             }
         }
     }
