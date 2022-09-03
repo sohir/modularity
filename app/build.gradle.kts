@@ -60,6 +60,8 @@ dependencies{
     implementation(Compose.navigation)
     implementation(Compose.hiltNavigation)
     implementation(Google.material)
+
+    implementation(SqlDelight.androidDriver)
 }
 
 

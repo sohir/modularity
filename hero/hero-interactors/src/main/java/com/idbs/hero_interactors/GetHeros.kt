@@ -3,6 +3,7 @@ package com.idbs.hero_interactors
 import com.idbs.core.DataState
 import com.idbs.core.ProgressBarState
 import com.idbs.core.UIComponent
+import com.idbs.hero_datasource.cache.HeroCache
 import com.idbs.hero_datasource.network.HeroService
 import com.idbs.hero_domain.Hero
 import kotlinx.coroutines.delay
@@ -13,13 +14,12 @@ import kotlinx.coroutines.flow.flow
 //in this use-case we need to get the data from the server insert into the cache
 
 class GetHeros(private val service:HeroService,
-    //TODO(Add caching
+    private val cache:HeroCache
     ) {
   fun execute():Flow<DataState<List<Hero>>> = flow {
       try {
           emit(DataState.Loading(progressBarState =  ProgressBarState.Loading))
-      delay(1000)
-          val hero :List<Hero> = try {
+          val heros :List<Hero> = try {
               //catch network exception
               service.getHeroStats()
           }catch (e:Exception)
@@ -33,7 +33,11 @@ class GetHeros(private val service:HeroService,
               ))
               listOf()
           }
-          emit(DataState.Data(hero))
+          //cache the network data
+          cache.insert(heros)
+          //emit data from cache
+          val cachedHeros = cache.selectAll()
+          emit(DataState.Data(cachedHeros))
       }catch (e:Exception){
           e.printStackTrace()
           emit(DataState.Response<List<Hero>>(
