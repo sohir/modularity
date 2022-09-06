@@ -1,4 +1,4 @@
-package com.idbs.ui_herolist
+package com.idbs.ui_herolist.ui
 
 import com.idbs.core.ProgressBarState
 import com.idbs.hero_domain.Hero

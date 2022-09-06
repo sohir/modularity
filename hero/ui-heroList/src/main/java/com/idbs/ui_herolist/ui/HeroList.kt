@@ -11,10 +11,11 @@ import androidx.compose.ui.Modifier
 import coil.ImageLoader
 import com.idbs.core.ProgressBarState
 import com.idbs.ui_herolist.components.HeroListItem
+import com.idbs.ui_herolist.ui.HeroListState
 
 @Composable
 fun HeroList(
-    state:HeroListState,
+    state: HeroListState,
     imageLoader: ImageLoader
 ){
     Box(

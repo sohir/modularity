@@ -13,7 +13,8 @@ import kotlinx.coroutines.flow.flow
 //Describe what this useCase does
 //in this use-case we need to get the data from the server insert into the cache
 
-class GetHeros(private val service:HeroService,
+class GetHeros(
+    private val service:HeroService,
     private val cache:HeroCache
     ) {
   fun execute():Flow<DataState<List<Hero>>> = flow {
@@ -46,8 +47,9 @@ class GetHeros(private val service:HeroService,
                   description = e.message ?: "UnKnown Error"
               )
           ))
-      }finally {
-          emit(DataState.Loading(progressBarState = ProgressBarState.Idle))
+      }
+      finally {
+          //emit(DataState.Loading(progressBarState = ProgressBarState.Idle))
       }
   }
 }
