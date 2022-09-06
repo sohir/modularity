@@ -9,5 +9,7 @@ dependencies {
     "implementation"(SqlDelight.androidDriver)
     //Coil image loading
     "implementation"(Coil.coil)
-
+    //Hilt
+    "implementation"(Hilt.android)
+   "kapt"(Hilt.compiler)
 }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,6 +22,7 @@ fun HeroList(
     ){
         LazyColumn{
             items(state.heros){ hero ->
+                //itemContent - the content displayed by a single item (HeroListItem == list_item.xml)
                 HeroListItem(hero = hero,
                 onSelectHero = {
 

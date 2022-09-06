@@ -28,6 +28,7 @@ import kotlin.math.round
 @Composable
 fun HeroListItem(
     hero: Hero,
+    //onClickInterface
     onSelectHero: (Int) -> Unit,
     imageLoader: ImageLoader,
 ){

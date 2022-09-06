@@ -16,7 +16,6 @@ data class HeroInteractors(
             return HeroInteractors(GetHeros(service = service, cache = cache))
         }
         val schema: SqlDriver.Schema = HeroCache.schema
-
         val dbName: String = HeroCache.dbName
     }
 

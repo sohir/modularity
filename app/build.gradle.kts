@@ -1,7 +1,11 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
     id("com.android.application")
     kotlin("android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
+
 }
 
 android {
@@ -66,6 +70,9 @@ dependencies{
     implementation(Google.material)
 
     implementation(SqlDelight.androidDriver)
+
+    implementation(Hilt.android)
+    kapt(Hilt.compiler)
 }
 
 
